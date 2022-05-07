@@ -20,11 +20,17 @@ RUN unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
 # Install poetry
 RUN pip install "poetry==$POETRY_VERSION"
 
-# Install dependencies via Poetry
+# Workdir and env vars
 WORKDIR /code
+ENV PYTHONPATH /code
+ENV RUN_HEADLESS True
+
+# Install dependencies via Poetry
 COPY poetry.lock pyproject.toml ./
 RUN poetry config virtualenvs.create false && \
     poetry install --no-interaction --no-ansi
 
 # Copy the test code into the image
 COPY tests ./tests
+COPY framework ./framework
+COPY config.ini .
