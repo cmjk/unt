@@ -12,8 +12,11 @@ class Actions:
         self.timeout = read_config()["Constants"]["TIMEOUT_s"]
 
     def _find_element(self, locator: tuple) -> WebElement:
-        return WebDriverWait(self.driver, self.timeout).\
-            until(ec.visibility_of_element_located(locator))
+        try:
+            return WebDriverWait(self.driver, self.timeout).\
+                until(ec.visibility_of_element_located(locator))
+        except TimeoutException as e:
+            raise TimeoutException(f"Element with locator {locator} was not found in time.") from e
 
     def is_element_visible(self, locator: tuple) -> bool:
         try:
