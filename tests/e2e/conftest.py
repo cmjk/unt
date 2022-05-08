@@ -3,8 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.webdriver import WebDriver
 from framework.utils import read_config, run_headless
 from framework.actions import Actions
-from selenium.webdriver.common.by import By
-from framework.elements import SEARCH_BUTTON, SEARCH_INPUT
+from framework.elements import SEARCH_BUTTON, SEARCH_INPUT, IFRAME
 
 
 def _get_chrome_options() -> webdriver.ChromeOptions:
@@ -44,8 +43,8 @@ def _get_chrome_options() -> webdriver.ChromeOptions:
 def start_webdriver() -> WebDriver:
     driver = webdriver.Chrome(options=_get_chrome_options())
     driver.get(read_config()["Constants"]["URL"])
-    frame = driver.find_element(By.TAG_NAME, "iframe")
-    driver.switch_to.frame(frame)
+    iframe = driver.find_element(*IFRAME)
+    driver.switch_to.frame(iframe)
     yield driver
     driver.quit()
 

@@ -4,6 +4,7 @@ from selenium.webdriver.support import expected_conditions as ec
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
+from selenium.webdriver.support.ui import Select
 
 
 class Actions:
@@ -40,5 +41,18 @@ class Actions:
             return 0
         return len(self.driver.find_elements(*locator))
 
-    def get_element_text(self, locator) -> str:
+    def get_element_text(self, locator: tuple) -> str:
         return self._find_element(locator).text
+
+    def select_dropdown_value(self, locator: tuple, value: str, loading_locator: tuple = None):
+        dropdown = Select(self._find_element(locator))
+        dropdown.select_by_value(value)
+        if loading_locator:
+            self.wait_for_element_to_not_be_visible(loading_locator)
+
+    def wait_for_element_to_not_be_visible(self, locator: tuple):
+        WebDriverWait(self.driver, self.timeout, poll_frequency=0.2). \
+            until(ec.invisibility_of_element_located(locator))
+
+    def get_href_value(self, locator: tuple) -> str:
+        return self._find_element(locator).get_attribute("href")
