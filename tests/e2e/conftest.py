@@ -1,18 +1,16 @@
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.webdriver import WebDriver
-from framework.utils import read_config, run_headless
+
 from framework.actions import Actions
 from framework.elements import SEARCH_BUTTON, SEARCH_INPUT, IFRAME
+from framework.utils import read_config, run_headless
 
 
 def _get_chrome_options() -> webdriver.ChromeOptions:
-    """
-    Sets up all of the options for running tests in Chrome.
-    :return: An instance of ChromeOptions.
-    """
     chrome_options = webdriver.ChromeOptions()
     headless_mode = run_headless()
+    chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
     chrome_options.add_experimental_option(
         "prefs",
         {
