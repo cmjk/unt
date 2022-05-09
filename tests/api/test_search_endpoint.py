@@ -1,10 +1,11 @@
-from tests.api.search_params import SearchParams
 import pytest
 import requests
-from framework.common.product_item import ProductItem, Products
-from framework.utils import read_config
 from assertpy import assert_that
+
+from framework.common.product_item import ProductItem, Products
 from framework.common.search_options import OrderBy
+from framework.utils import read_config
+from tests.api.search_params import SearchParams
 
 
 class TestSearch:
