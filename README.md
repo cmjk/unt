@@ -15,7 +15,8 @@ Steps:
 poetry config virtualenvs.in-project true --local
 poetry install
 ```
-3. Run tests
+4. Add repo directory to PYTHONPATH environment variable
+5. Run tests
 
 ```
 poetry run pytest
