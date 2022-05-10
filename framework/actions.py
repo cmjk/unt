@@ -25,8 +25,8 @@ class Actions:
         try:
             return WebDriverWait(self.driver, self.timeout). \
                 until(ec.visibility_of_element_located(locator))
-        except TimeoutException as e:
-            raise TimeoutException(f"Element with locator {locator} was not found in time.") from e
+        except TimeoutException:
+            raise TimeoutException(f"Element with locator {locator} was not found in time.") from None
 
     def is_element_visible(self, locator: tuple) -> bool:
         """
