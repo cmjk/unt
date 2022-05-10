@@ -19,7 +19,7 @@ poetry install
 5. Run tests
 
 ```
-poetry run pytest
+poetry run pytest --verbose
 ```
 
 ## Running in Docker
@@ -31,5 +31,5 @@ docker build -t uit:local .
 ```
 4. Run tests
 ```
-docker run uit:local /bin/bash -c "poetry run pytest"
+docker run uit:local /bin/bash -c "poetry run pytest --verbose"
 ```
