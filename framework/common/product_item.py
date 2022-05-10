@@ -1,14 +1,21 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
+
 from bs4 import BeautifulSoup
 
 
 @dataclass
 class ProductItem:
+    """
+    Represents a product
+    """
     name: str
     price: float
 
     @staticmethod
     def from_html(html: str) -> list["ProductItem"]:
+        """
+        Constructs a list of ProductItems from API output by parsing HTML
+        """
         parsed = BeautifulSoup(html, "html.parser")
         return [
             ProductItem(
@@ -19,6 +26,9 @@ class ProductItem:
 
 @dataclass
 class Products:
+    """
+    Stores products
+    """
     asus_n551: ProductItem = ProductItem(name="Asus N551JK-XO076H Laptop",
                                          price=1500.0)
     samsung_series9: ProductItem = ProductItem(name="Samsung Series 9 NP900X4C Premium Ultrabook",

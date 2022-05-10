@@ -45,6 +45,9 @@ class TestSearch:
         ]
     )
     def test_order_by(query: str, order_by: OrderBy, expected: list[ProductItem]):
+        """
+        Tests the order by feature
+        """
         response = requests.get(TestSearch.URL + SearchParams(q=query, orderby=order_by.value).to_str())
         assert_that(ProductItem.from_html(response.text)).is_equal_to(expected)
 
@@ -68,5 +71,9 @@ class TestSearch:
                              Products.lenovo_thinkpad], id="Display 6 per page")
         ])
     def test_display_per_page(query: str, display_per_page: int, expected: list[ProductItem]):
+        """
+        Tests display per page feature
+        This doesn't adhere to the wireframe, but I thought to leave this in regardless
+        """
         response = requests.get(TestSearch.URL + SearchParams(q=query, pagesize=display_per_page).to_str())
         assert_that(ProductItem.from_html(response.text)).is_equal_to(expected)

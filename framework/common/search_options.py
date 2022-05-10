@@ -2,6 +2,9 @@ from enum import Enum
 
 
 class OrderBy(Enum):
+    """
+    Corresponds to Sort By options in the UI
+    """
     default = 0
     a_to_z = 5
     z_to_a = 6
